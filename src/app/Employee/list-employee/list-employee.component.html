@@ -1,0 +1,45 @@
+<h2 class="display-6 ">Employee List</h2>
+<div class="container fluid">
+    <div class="row">
+        <div class="col-md-3" *ngFor="let emp of list">
+            <div class="card" >
+                <div *ngIf="emp.gender==2 "><img src="https://cdn-icons-png.flaticon.com/512/0/93.png" class="card-img-top" alt="...">
+                </div>
+                <div *ngIf="emp.gender==1 "><img src="https://cdn-icons-png.flaticon.com/512/65/65581.png" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">EID : {{emp.id}} <br>Name: {{emp.name}}</h5>
+                    <p class="card-text">DOB : {{emp.dateOfBirth|date}}</p>
+                    <p class="card-text" >Gender :{{getGender(emp.gender)}}</p>
+                    <p class="card-text">Mob : +91{{emp.mobileNo}}</p>
+                    <p class="card-text">Email : {{emp.email}}</p>
+                    <p class="card-text">Salary : {{emp.salary|currency:'INR'}}</p>
+                    <p class="card-text">Dept : {{emp.department.name}}</p>
+                    <div class="card-footer ">
+                   <a [routerLink]="" class="btn btn-primary" [routerLink]="['/employees/edit/',emp.id]">Edit</a>
+                   <a [routerLink]="" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#deleteModal"
+                   (click)='setId(emp.id)'>Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Confirm</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete this Employee Details?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          <button type="button" class="btn btn-danger " (click)="delete()" data-bs-dismiss="modal" >Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>

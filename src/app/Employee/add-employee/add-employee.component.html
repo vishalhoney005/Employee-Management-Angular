@@ -1,0 +1,86 @@
+<h2 class="display-6 p-3  ">Add Employee</h2>
+<div class="p-3 ">
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group" hidden>
+        <label class="form-label " for="id">Id</label>
+        <input type="number" class="form-control " id="id" formControlName="id" >
+    </div>
+    <div class="form-group col-6 pb-3">
+        <label for="name" class="form-label" >Name</label>
+        <input type="text" class="form-control " id="name" formControlName="name">
+        <div *ngIf="form.hasError('required','name') && (form.controls['name'].touched ||
+            form.controls['name'].dirty)" class="alert alert-danger" role="alert">
+            Employee name is required.
+        </div>
+    </div>
+    <div class="form-group col-6 pb-3">
+        <label for="dateOfBirth" class="form-label" >DOB</label>
+        <input type="date" class="form-control " id="dateOfBirth" formControlName="dateOfBirth">
+        <div *ngIf="form.hasError('required','dateOfBirth') && (form.controls['dateOfBirth'].touched ||
+            form.controls['dateOfBirth'].dirty)" class="alert alert-danger" role="alert">
+            DOB is required.
+        </div>
+        <div *ngIf="form.hasError('futureDate','dateOfBirth')&&(form.controls['dateOfBirth'].touched||
+        form.controls['dateOfBirth'].dirty)" class="alert alert-danger " role="alert">
+        Invalid DateOfBirth</div>
+
+    </div>
+    <div class="form-group" >
+        <label for="gender" class="form-label">Gender
+        </label><br>
+    <input type="radio"   name="gender" id="male"  [value]="genderval.Male" formControlName="gender" checked>
+    <label for="male" class="form-label p-3 "> Male</label>
+    <input type="radio" name="gender" id="female" [value]="genderval.Female" formControlName="gender" >
+    <label for="female" class="form-label p-3 ">Female</label>
+        <div *ngIf="form.hasError('required','gender') && (form.controls['gender'].touched ||
+            form.controls['gender'].dirty)" class="alert alert-danger" role="alert">
+            Gender is required.
+        </div>
+    </div>
+    <div class="form-group col-6 pb-3">
+        <label for="mobileNo" class="form-label" >Mobile No</label>
+        <input type="tel" class="form-control " id="mobileNo" formControlName="mobileNo">
+        <div *ngIf="form.hasError('required','mobileNo') && (form.controls['mobileNo'].touched ||
+            form.controls['mobileNo'].dirty)" class="alert alert-danger" role="alert">
+            Mobile No is required.
+        </div>
+        <div *ngIf="form.hasError('minlength', 'mobileNo') && form.controls['mobileNo'].touched"
+        class="alert alert-danger" role="alert">
+     Mobile No must be at least 10 characters long.
+   </div>
+    </div>
+    <div class="form-group col-6 pb-3">
+        <label for="email" class="form-label" >Email</label>
+        <input type="email" class="form-control " id="email" formControlName="email">
+        <div *ngIf="form.hasError('required','email') && (form.controls['email'].touched ||
+            form.controls['email'].dirty)" class="alert alert-danger" role="alert">
+            Email is required.
+        </div>
+    </div>
+    <div class="form-group col-6 pb-3">
+        <label for="salary" class="form-label" >Salary</label>
+        <input type="number" class="form-control " id="salary" formControlName="salary">
+        <div *ngIf="form.hasError('required','salary') && (form.controls['salary'].touched ||
+            form.controls['salary'].dirty)" class="alert alert-danger" role="alert">
+            Salary is required.
+        </div>
+        <div *ngIf="form.hasError('min','salary')&&(form.controls['salary'].touched||
+        form.controls['salary'].dirty)" class="alert alert-danger " role="alert">
+            Minimum salary is 1</div>
+    </div>
+    <div class="form-group col-6 pb-3">
+        <label for="department" class="form-label" >Department</label>
+        <select  class="form-select  form-control " id="department" formControlName="departmentId">
+            <option value="" selected disabled>--Select Department</option>
+            <option *ngFor="let dep of list" value="{{dep.id}}">{{dep.name}}</option>
+            </select>
+        <div *ngIf="form.hasError('required','departmentId') && (form.controls['departmentId'].touched ||
+            form.controls['departmentId'].dirty)" class="alert alert-danger" role="alert">
+            Department is required.
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary " >Add Employee</button>
+    </div>
+</form>
+</div>
